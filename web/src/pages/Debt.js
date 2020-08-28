@@ -1,14 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import './App.css';
+import '../App.css';
 import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
 import * as Yup from 'yup';
-import "./styles.css";
+import { Link } from 'react-router-dom';
+import "../styles.css";
 
-import Input from './components/Form/Input';
+import Input from '../components/Form/Input';
 
 
-function App() {
+function Debt() {
   const formRef = useRef(null);
 
   async function handleSubmit(data, { reset }){
@@ -60,7 +61,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Contas a Pagar</h1>
+      <h1>Contas a Pagar - debt</h1>
+      <Link to="/">Go Home</Link>
 
       <Form ref={formRef}  onSubmit={handleSubmit}>
         <Input name="descricao" label="Descrição" />
@@ -77,4 +79,4 @@ function App() {
   );
 }
 
-export default App;
+export default Debt;

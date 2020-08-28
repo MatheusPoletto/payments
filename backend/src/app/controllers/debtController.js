@@ -1,8 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
 
-// const Project = require('../models/Project');
-// const Task = require('../models/Task');
 const Debt = require('../models/Debt');
 const PaymentMethod = require('../models/PaymentMethod');
 const Parcel = require('../models/Parcel');
