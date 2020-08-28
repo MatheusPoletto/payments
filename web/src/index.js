@@ -13,7 +13,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/login" component={Login} />
-      <ProtectedRoute exact path="/" exact={true} component={Home} />
+      <ProtectedRoute path="/" exact={true} component={Home} />
       <ProtectedRoute path="/debt" component={Debt} />
     </Switch>
   </ BrowserRouter>,
