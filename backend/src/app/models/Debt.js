@@ -1,4 +1,5 @@
 const mongoose = require('../../database');
+const { getNextMonthFromDate } = require('../helpers/functions');
 
 const DebtSchema = new mongoose.Schema({
     description: {
@@ -8,10 +9,10 @@ const DebtSchema = new mongoose.Schema({
     totalValue: {
         type: Number,
         get: val => {
-            return (val / 100).toFixed(2);
+            return val.toFixed(2);
         },
         set: val => {
-            return num * 100;
+            return val ;
         },
         required: false,
         default: 0
@@ -46,6 +47,33 @@ const DebtSchema = new mongoose.Schema({
     }],   
 });
 
+
+
+
+DebtSchema.methods.generateParcels = function(parcelsNumber) {
+    if(this.totalValue == 0)
+        return [];
+
+    const valuePerParcel = this.totalValue / parcelsNumber;
+
+    let dueDate = new Date();
+
+    let parcels = [];
+    for(let i = 0; i < parcelsNumber; i ++){   
+        dueDate = i == 0 ? getNextMonthFromDate(new Date()) : getNextMonthFromDate(dueDate)
+        
+        const parcel = {
+            number: i + 1,
+            value: valuePerParcel,
+            dueDate,
+            debt: this._id
+        };
+
+        parcels.push(parcel);
+    }
+
+    return parcels;
+};
 
 const Debt = mongoose.model('Debt', DebtSchema);
 

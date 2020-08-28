@@ -12,10 +12,10 @@ const ParcelSchema = new mongoose.Schema({
     value: {
         type: Number,
         get: val => {
-            return (val / 100).toFixed(2);
+            return val.toFixed(2);
         },
         set: val => {
-            return num * 100;
+            return val;
         },
         required: false,
         default: 0
@@ -29,7 +29,7 @@ const ParcelSchema = new mongoose.Schema({
     paymentUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     },
     debt: {
         type: mongoose.Schema.Types.ObjectId,
