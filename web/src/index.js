@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+//import './index.css';
+import GlobalStyle from  "./styles/global";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import ProtectedRoute from './components/Route/ProtectedRoute';
+import PrivateRoute  from './components/Route/PrivateRoute';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -13,9 +14,10 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/login" component={Login} />
-      <ProtectedRoute path="/" exact={true} component={Home} />
-      <ProtectedRoute path="/debt" component={Debt} />
+      <PrivateRoute  path="/" exact={true} component={Home} />
+      <PrivateRoute  path="/debt" component={Debt} />
     </Switch>
+    <GlobalStyle/>
   </ BrowserRouter>,
   document.getElementById('root')
 );

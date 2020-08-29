@@ -24,7 +24,7 @@ export default function Input({ name, label, ...rest }) {
         {...rest}
       />
 
-      {error && <span style={{ color: "#f00" }}>{error}</span>}
+      {error && <span className="error" style={{marginBottom: '10px'}}>{error}</span>}
     </>
   );
 }
