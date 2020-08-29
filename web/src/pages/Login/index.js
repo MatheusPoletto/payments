@@ -8,7 +8,7 @@ import { login, logout } from "../../services/auth";
 
 import Input from '../../components/Form/Input';
 
-import { Form, Container } from "./styles";
+import { Form } from "./styles";
 
 class Login extends Component {
     constructor(props) {
@@ -70,7 +70,6 @@ class Login extends Component {
     render() {
         logout();
         return (
-        <Container>
             <Form ref={this.formRef} onSubmit={this.handleSubmit}>
             
             {this.state.error && <p className="error">{this.state.error}</p>}
@@ -82,7 +81,6 @@ class Login extends Component {
             <hr />
             {/* <Link to="/signup">Criar conta grátis</Link> */}
             </Form>
-        </Container>
         );
     }
 }

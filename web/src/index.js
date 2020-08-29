@@ -8,14 +8,15 @@ import PrivateRoute  from './components/Route/PrivateRoute';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
+import DebtList from './pages/DebtList';
 import Debt from './pages/Debt';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/login" component={Login} />
-      <PrivateRoute  path="/" exact={true} component={Home} />
-      <PrivateRoute  path="/debt" component={Debt} />
+      <PrivateRoute  path="/" exact={true} component={DebtList} />
+      <PrivateRoute  path="/debt" component={Home} />
     </Switch>
     <GlobalStyle/>
   </ BrowserRouter>,
