@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import { Link, withRouter } from "react-router-dom";
+
+import Navbar from '../../components/Template/Navbar';
 
 import api from "../../services/api";
 
@@ -19,10 +22,12 @@ function DebtList(){
     }, []);
 
     return (
-        <ul>
-            {debts.map((debt) => <Item key={debt._id} value={debt.totalValue} />)}
-        </ul>
-       
+        <>
+            <Navbar/>
+            <ul>
+                {debts.map((debt) => <Item key={debt._id} value={debt.totalValue} />)}
+            </ul>
+        </>
         
     );
       

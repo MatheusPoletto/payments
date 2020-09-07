@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { useField } from "@unform/core";
 
+import { Alert } from 'react-bootstrap';
+
+import './styles.css';
+
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
 
@@ -15,16 +19,27 @@ export default function Input({ name, label, ...rest }) {
   }, [fieldName, registerField]);
   return (
     <>
-      {label && <label htmlFor={fieldName}>{label}</label>}
 
-      <input
-        ref={inputRef}
-        id={fieldName}
-        defaultValue={defaultValue}
-        {...rest}
-      />
+      <div className="form-group">
+        {label && <label className="field-name" htmlFor={fieldName}>{label}</label>}
+        
+        <input className="field"
+          ref={inputRef}
+          id={fieldName}
+          defaultValue={defaultValue}
+          {...rest}
+        />
 
-      {error && <span className="error" style={{marginBottom: '10px'}}>{error}</span>}
+
+        {error && 
+        <Alert className="field-error" variant='warning'>
+          {error}
+        </Alert>}
+        
+      </div>
+
+      
+      
     </>
   );
 }

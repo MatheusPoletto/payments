@@ -2,13 +2,16 @@ import React, { createRef, Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
 import * as Yup from 'yup';
-
 import api from "../../services/api";
-import { login, logout } from "../../services/auth";
 
+import { Form } from '@unform/web';
 import Input from '../../components/Form/Input';
+import Navbar from '../../components/Template/Navbar';
+import { Alert } from 'react-bootstrap';
 
-import { Form } from "./styles";
+import './styles.css'
+
+import { login, logout } from "../../services/auth";
 
 class Login extends Component {
     constructor(props) {
@@ -20,16 +23,15 @@ class Login extends Component {
           };
 
         this.formRef = createRef();
-      }
-
+    }
 
     handleSubmit = async (data, { reset }) => {
         try{
         this.formRef.current.setErrors({});
 
         const schema = Yup.object().shape ({
-            email: Yup.string().email().required('O E-mail é obrigatório'),        
-            password: Yup.string().min(3, 'Mínimo de 3 caracteres').required('A senha é obrigatória'),                
+            email: Yup.string().email().required('O E-mail é obrigatório.'),        
+            password: Yup.string().min(3, 'Mínimo de 3 caracteres').required('A senha é obrigatória.'),                
         });
 
         await schema.validate(data, {
@@ -45,11 +47,10 @@ class Login extends Component {
             
             
         }).catch(e => {
-            this.setState({error: "Houve um problema com o login, verifique suas credenciais."});
+            this.setState({error: "Houve um problema com o login, verifique suas credenciais e tente novamente."});
         });
 
         }catch(err){
-        
         if(err instanceof Yup.ValidationError){
             const errorMessages = {};
 
@@ -70,17 +71,26 @@ class Login extends Component {
     render() {
         logout();
         return (
+            <>
+            <Navbar/>
             <Form ref={this.formRef} onSubmit={this.handleSubmit}>
-            
-            {this.state.error && <p className="error">{this.state.error}</p>}
+                <h3 className="text-center">Autenticação</h3>                
 
-            <Input type="email" name="email" label="E-mail" />
-            <Input type="password" name="password" label="Senha" />
-            
-            <button type="submit">Entrar</button>
-            <hr />
-            {/* <Link to="/signup">Criar conta grátis</Link> */}
-            </Form>
+                <Input type="email" name="email" label="E-mail" className="form-control" placeholder="Digite seu e-mail" />
+                <Input type="password" name="password" label="Senha" className="form-control" placeholder="Digita sua senha" />
+                           
+                <button type="submit" className="btn btn-primary btn-block">Entrar</button>
+
+                {this.state.error && 
+                <Alert className="field-error" variant='danger'>
+                {this.state.error}
+                </Alert>}
+        
+
+                {/* <p className="text-right">
+                    Novo usuário? <a href="#">Cadastre-se.</a>
+                </p> */}
+            </Form></>
         );
     }
 }
