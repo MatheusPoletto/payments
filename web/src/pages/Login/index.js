@@ -6,7 +6,7 @@ import api from "../../services/api";
 
 import { Form } from '@unform/web';
 import Input from '../../components/Form/Input';
-import Navbar from '../../components/Template/Navbar';
+import Menu from '../../components/Template/Menu';
 import { Alert } from 'react-bootstrap';
 
 import './styles.css'
@@ -47,6 +47,7 @@ class Login extends Component {
             
             
         }).catch(e => {
+            alert(JSON.stringify(e));
             this.setState({error: "Houve um problema com o login, verifique suas credenciais e tente novamente."});
         });
 
@@ -72,7 +73,7 @@ class Login extends Component {
         logout();
         return (
             <>
-            <Navbar/>
+            <Menu/>
             <Form ref={this.formRef} onSubmit={this.handleSubmit}>
                 <h3 className="text-center">Autenticação</h3>                
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import { Link, withRouter } from "react-router-dom";
 
-import Navbar from '../../components/Template/Navbar';
+import { Table, Col, Row, Container } from 'react-bootstrap';
+
+import Menu from '../../components/Template/Menu';
 
 import api from "../../services/api";
 
@@ -23,10 +24,32 @@ function DebtList(){
 
     return (
         <>
-            <Navbar/>
-            <ul>
-                {debts.map((debt) => <Item key={debt._id} value={debt.totalValue} />)}
-            </ul>
+            <Menu/>
+            <Container>
+            <Row>
+                <Col><Table striped bordered hover size="sm">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Valor</th>                
+                </tr>
+            </thead>
+            <tbody>
+                {debts.map((debt) => 
+                    <tr>
+                        <td>
+                            {debt._id}
+                        </td>
+                        <td>
+                        {debt.totalValue}
+                        </td>
+                    </tr>
+                )}                
+            </tbody>
+            </Table></Col>
+            </Row>
+            </Container>
+            
         </>
         
     );

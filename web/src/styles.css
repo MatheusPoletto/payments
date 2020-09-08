@@ -9,11 +9,15 @@
   
   #root {
     margin: 0 auto;
-    max-width: 330px;
+    /* max-width: 330px; */
     width: 100%;
     padding: 40px 0;
   }
   
   .field-error {
     margin-top: 1%;
+  }
+
+  .fixed-top + * {
+    margin-top: 5%;
   }
